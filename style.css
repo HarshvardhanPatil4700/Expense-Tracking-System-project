@@ -1,0 +1,207 @@
+/* ================== RESET ================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ================== THEME ================== */
+:root {
+  --bg: #f5f7fb;
+  --card: #ffffff;
+
+  --primary: #2563eb; /* Royal Blue */
+  --primary-soft: #dbeafe;
+  --primary-hover: #1d4ed8;
+
+  --danger: #ef4444;
+  --danger-soft: #fee2e2;
+
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+
+  --border: #e5e7eb;
+  --shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+}
+
+/* ================== PAGE ================== */
+body {
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  background: var(--bg);
+  color: var(--text-main);
+}
+
+/* ================== CONTAINER ================== */
+.container {
+  max-width: 1200px;
+  margin: 60px auto;
+  padding: 40px;
+  background: var(--card);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.container:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 30px 60px rgba(15, 23, 42, 0.12);
+}
+
+/* ================== TITLE ================== */
+h1 {
+  text-align: center;
+  font-size: 38px;
+  font-weight: 700;
+  margin-bottom: 35px;
+  letter-spacing: -0.5px;
+}
+
+/* ================== FORM ================== */
+form {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr auto;
+  gap: 15px;
+  margin-bottom: 35px;
+}
+
+/* INPUTS */
+form input,
+form select {
+  padding: 14px 16px;
+  border-radius: 14px;
+  font-size: 14px;
+  border: 1px solid var(--border);
+  background: #fbfdff;
+  transition: all 0.25s ease;
+}
+
+form input::placeholder {
+  color: var(--text-muted);
+}
+
+form input:hover,
+form select:hover {
+  border-color: var(--primary);
+}
+
+form input:focus,
+form select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px var(--primary-soft);
+  background: #ffffff;
+}
+
+/* ADD BUTTON */
+form button {
+  padding: 14px 22px;
+  border-radius: 14px;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, var(--primary), #3b82f6);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+form button:hover {
+  background: linear-gradient(135deg, var(--primary-hover), var(--primary));
+  transform: translateY(-1px);
+  box-shadow: 0 12px 25px rgba(37, 99, 235, 0.35);
+}
+
+form button:active {
+  transform: scale(0.97);
+}
+
+/* ================== TABLE ================== */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 14px;
+}
+
+thead th {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding-bottom: 8px;
+  text-align: center;
+}
+
+tbody tr {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+tbody tr:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
+}
+
+tbody td {
+  padding: 14px;
+  font-size: 14px;
+  text-align: center;
+}
+
+tbody tr td:first-child {
+  border-radius: 16px 0 0 16px;
+}
+
+tbody tr td:last-child {
+  border-radius: 0 16px 16px 0;
+}
+
+/* DELETE BUTTON */
+td button {
+  padding: 8px 16px;
+  font-size: 13px;
+  border-radius: 12px;
+  border: none;
+  background: var(--danger-soft);
+  color: var(--danger);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+td button:hover {
+  background: var(--danger);
+  color: white;
+  box-shadow: 0 10px 25px rgba(239, 68, 68, 0.35);
+}
+
+/* ================== TOTAL ================== */
+h2 {
+  margin-top: 30px;
+  text-align: right;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+h2 span {
+  color: var(--primary);
+}
+
+/* ================== RESPONSIVE ================== */
+@media (max-width: 900px) {
+  form {
+    grid-template-columns: 1fr;
+  }
+
+  h2 {
+    text-align: center;
+  }
+}

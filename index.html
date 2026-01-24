@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Expense Tracker</title>
+
+    <!-- CSS CONNECTED HERE -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Expense Tracker</h1>
+
+      <!-- Expense Form -->
+      <form id="expenseForm">
+        <input type="text" id="title" placeholder="Expense Title" required />
+
+        <input type="number" id="amount" placeholder="Amount" required />
+
+        <select id="category" required>
+          <option value="">Select Category</option>
+          <option>Food</option>
+          <option>Travel</option>
+          <option>Shopping</option>
+          <option>Other</option>
+        </select>
+
+        <input type="date" id="date" required />
+
+        <button type="submit">Add Expense</button>
+      </form>
+
+      <!-- Expense Table -->
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Amount</th>
+            <th>Category</th>
+            <th>Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="expenseList">
+          <!-- Data added using JavaScript -->
+        </tbody>
+      </table>
+
+      <!-- Total Expense -->
+      <h2>Total Expense: ₹<span id="total">0</span></h2>
+    </div>
+
+    <!-- JAVASCRIPT CONNECTED HERE -->
+    <script src="script.js"></script>
+  </body>
+</html>

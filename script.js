@@ -1,74 +1,58 @@
-// Load expenses from localStorage
-var expenses = JSON.parse(localStorage.getItem("expenses"));
-if (expenses === null) {
-  expenses = [];
-}
+const API_URL = "http://localhost:5000/api/expenses";
 
-var form = document.getElementById("expenseForm");
-var expenseList = document.getElementById("expenseList");
-var totalDisplay = document.getElementById("total");
+const form = document.getElementById("expenseForm");
+const expenseList = document.getElementById("expenseList");
+const totalDisplay = document.getElementById("total");
 
-// Show existing expenses on load
-showExpenses();
+fetchExpenses();
 
-// Add expense
-form.addEventListener("submit", function (e) {
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  var title = document.getElementById("title").value;
-  var amount = parseInt(document.getElementById("amount").value);
-  var category = document.getElementById("category").value;
-  var date = document.getElementById("date").value;
-
-  var expense = {
-    title: title,
-    amount: amount,
-    category: category,
-    date: date,
+  const expense = {
+    title: title.value,
+    amount: parseInt(amount.value),
+    category: category.value,
+    date: date.value,
   };
 
-  expenses.push(expense);
-  localStorage.setItem("expenses", JSON.stringify(expenses));
+  await fetch(API_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(expense),
+  });
 
   form.reset();
-  showExpenses();
+  fetchExpenses();
 });
 
-// Display expenses
-function showExpenses() {
+async function fetchExpenses() {
+  const res = await fetch(API_URL);
+  const expenses = await res.json();
+
   expenseList.innerHTML = "";
-  var total = 0;
+  let total = 0;
 
-  for (var i = 0; i < expenses.length; i++) {
-    total = total + expenses[i].amount;
+  expenses.forEach((exp) => {
+    total += exp.amount;
 
-    var row = document.createElement("tr");
-    row.innerHTML =
-      "<td>" +
-      expenses[i].title +
-      "</td>" +
-      "<td>" +
-      expenses[i].amount +
-      "</td>" +
-      "<td>" +
-      expenses[i].category +
-      "</td>" +
-      "<td>" +
-      expenses[i].date +
-      "</td>" +
-      "<td><button onclick='deleteExpense(" +
-      i +
-      ")'>Delete</button></td>";
-
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${exp.title}</td>
+      <td>${exp.amount}</td>
+      <td>${exp.category}</td>
+      <td>${exp.date}</td>
+      <td>
+        <button onclick="deleteExpense('${exp._id}')">Delete</button>
+      </td>
+    `;
     expenseList.appendChild(row);
-  }
+  });
 
   totalDisplay.innerText = total;
 }
 
-// Delete expense
-function deleteExpense(index) {
-  expenses.splice(index, 1);
-  localStorage.setItem("expenses", JSON.stringify(expenses));
-  showExpenses();
+async function deleteExpense(id) {
+  await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+  fetchExpenses();
 }
